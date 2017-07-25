@@ -1,9 +1,9 @@
 pipeline {
-    agent { docker 'maven:3.3.3' }
+    agent { docker 'brauzhq-phpunit' }
     stages {
         stage('build') {
             steps {
-                sh 'mvn --version'
+                sh 'docker run -it --rm -v "$PWD":/var/www/html/ -w /var/www/html/ 6232ba0d5ba5 phpunit --bootstrap src/Email.php tests/EmailTest'
                 sh 'echo "done"'
             }
         }

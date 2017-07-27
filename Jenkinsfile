@@ -5,7 +5,7 @@ pipeline {
             steps {
                 sh 'chmod 777 $(pwd)/src/Email.php'
                 sh 'cat $(pwd)/src/Email.php'
-                sh 'docker run -it -v "$PWD":/var/www/html/ -w /var/www/html/ 6232ba0d5ba5 ls'
+                sh 'docker run -i -v "$PWD":/var/www/html/ -w /var/www/html/ 6232ba0d5ba5 ls > $PWD/output.log'
                 sh 'echo "done"'
             }
         }

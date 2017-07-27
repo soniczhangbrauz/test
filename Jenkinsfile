@@ -4,7 +4,7 @@ pipeline {
         stage('build') {
             steps {
                 sh 'pwd'
-                sh 'docker run -i --rm -v "$PWD":/var/www/html/ -w /var/www/html/ 6232ba0d5ba5 phpunit --bootstrap src/Email.php tests/EmailTest'
+                sh 'docker run -i --rm -v "$PWD":/var/www/html/ -w /var/www/html/ 6232ba0d5ba5 phpunit --bootstrap $PWD/src/Email.php $PWD/tests/EmailTest'
                 sh 'echo "done"'
             }
         }

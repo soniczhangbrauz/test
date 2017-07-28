@@ -3,10 +3,11 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'chmod 777 $(pwd)/src/Email.php'
-                sh 'cat $(pwd)/src/Email.php'
-                sh 'docker run --privileged -i -v /home/sonic/jenkins/workspace/test/:/var/www/html/ -u root 6232ba0d5ba5 ls /var/www/html/'
-                sh 'echo "done"'
+                sh 'docker volume create $BUILD_TAG'
+                sh 'docker run --name 6232ba0d5ba5_$($BUILD_TAG) -i -w /var/www/html/ 6232ba0d5ba5'
+                sh 'docker copy $PWD/* 6232ba0d5ba5_$($BUILD_TAG):/var/www/html/'
+                sh 'docker exec -i 6232ba0d5ba5_$($BUILD_TAG) ls'
+                //sh 'docker run --name  -i -v $BUILD_TAG:/var/www/html/ 6232ba0d5ba5 phpunit --bootstrap $(pwd)/src/Email.php $(pwd)/tests/EmailTest.php'
             }
         }
     }

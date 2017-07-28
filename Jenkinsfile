@@ -15,7 +15,8 @@ pipeline {
                     emailext (
                         subject: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
                         body: """<p>FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
-                            <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""${FILE,path="result.log"}",
+                            <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>
+                            <p>${FILE,path=result.log}</p>""",
                         to: 'sonic@brauz.com',
                         recipientProviders: [[$class: 'CulpritsRecipientProvider']]
                     )

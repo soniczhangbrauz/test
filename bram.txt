@@ -1,5 +1,0 @@
-new feature
-Hello
-this is bram
-
-i made commit on a new branch, instead of dev
